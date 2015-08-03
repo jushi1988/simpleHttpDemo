@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="simplehttpsdemo" default="jar" basedir=".">
+	<property name="project.name" value="dataexchangeservice" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="target.dir" value="${basedir}/target" />
+	<target name="clean">
+		<delete dir="${build.classes.dir}" />
+		<delete dir="${target.dir}" />
+	</target>
+	<target name="init" depends="clean">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${target.dir}" />
+	</target>
+	<target name="compile" depends="init">
+		<echo>=== COMPILE ===</echo>
+		<echo>Compiling ${src.dir} files ...</echo>
+		<javac debug="on" srcdir="${src.dir}" destdir="${build.classes.dir}" includes="**/*">
+			<src path="${src.dir}" />
+			<compilerarg line="-encoding UTF-8 " />
+		</javac>
+	</target>
+	<target name="jar" depends="compile">
+		<echo>=== PACKAGE ===</echo>
+		<jar destfile="${target.dir}/${project.name}.jar">
+			<fileset dir="${build.classes.dir}" />
+		</jar>
+	</target>
+</project>
